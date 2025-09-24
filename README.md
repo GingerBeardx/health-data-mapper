@@ -9,6 +9,7 @@ The Health Data Mapper provides an intuitive interface for exploring relationshi
 ## ✨ Features
 
 ### Phase 1 (Completed)
+
 - **Interactive US Map**: Mapbox-powered visualization with smooth pan and zoom
 - **Choropleth Visualization**: Color-coded states based on health metric values
 - **Multiple Health Metrics**: Switch between Autism Rate, Asthma Rate, and Obesity Rate
@@ -17,6 +18,7 @@ The Health Data Mapper provides an intuitive interface for exploring relationshi
 - **Professional UI**: Clean sidebar with metric selection and data insights
 
 ### Upcoming Phases
+
 - **Real Data Integration**: CDC API integration for live health statistics
 - **Correlation Analysis**: Statistical analysis between health and environmental data
 - **Time Series**: Historical data trends and patterns
@@ -34,29 +36,34 @@ The Health Data Mapper provides an intuitive interface for exploring relationshi
 ## 🚀 Getting Started
 
 ### Prerequisites
+
 - Node.js (v18 or higher)
 - npm or yarn package manager
 
 ### Installation
 
 1. Clone the repository:
+
 ```bash
 git clone <repository-url>
 cd health-data-mapper
 ```
 
 2. Install dependencies:
+
 ```bash
 npm install
 ```
 
 3. Set up environment variables:
-Create a `.env.local` file in the root directory:
+   Create a `.env.local` file in the root directory:
+
 ```env
-NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN=your_mapbox_token_here
+MAPBOX_ACCESS_TOKEN=your_mapbox_token_here
 ```
 
 4. Start the development server:
+
 ```bash
 npm run dev
 ```
@@ -66,6 +73,7 @@ npm run dev
 ## 📊 Data Sources
 
 Currently using mock data to demonstrate functionality. Future phases will integrate:
+
 - **CDC WONDER API**: Autism prevalence and birth statistics
 - **CDC Data.gov APIs**: Vaccination rates and health outcomes
 - **Weather.gov API**: Climate and environmental data
@@ -146,4 +154,4 @@ This project is part of a health data visualization initiative demonstrating cor
 
 ---
 
-*Built with ❤️ for public health data exploration and education*
+_Built with ❤️ for public health data exploration and education_
