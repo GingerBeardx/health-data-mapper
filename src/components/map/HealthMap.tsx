@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useCallback, useRef } from "react";
+import React, { useState, useCallback, useRef, useEffect } from "react";
 import Map, { Source, Layer, MapRef } from "react-map-gl/mapbox";
 import type { MapViewState, GeoJSON, GeoFeature } from "@/lib/types/geo";
 import type { StateHealthData } from "@/lib/types/health";
@@ -31,6 +31,8 @@ export default function HealthMap({
 }: HealthMapProps) {
   const [viewState, setViewState] = useState<MapViewState>(INITIAL_VIEW_STATE);
   const [hoverInfo, setHoverInfo] = useState<HoverInfo | null>(null);
+  const [mapboxToken, setMapboxToken] = useState<string | null>(null);
+  const [tokenError, setTokenError] = useState<string | null>(null);
   const mapRef = useRef<MapRef>(null);
 
   // Pre-process GeoJSON with health data
@@ -76,12 +78,35 @@ export default function HealthMap({
     setHoverInfo(hoveredFeature ? { feature: hoveredFeature, x, y } : null);
   }, []);
 
-  const mapboxToken = process.env.MAPBOX_ACCESS_TOKEN;
+  // Fetch Mapbox token from API
+  useEffect(() => {
+    fetch('/api/mapbox')
+      .then(res => res.json())
+      .then(data => {
+        if (data.error) {
+          setTokenError(data.error);
+        } else {
+          setMapboxToken(data.token);
+        }
+      })
+      .catch(err => {
+        setTokenError('Failed to fetch Mapbox token');
+        console.error('Mapbox token fetch error:', err);
+      });
+  }, []);
+
+  if (tokenError) {
+    return (
+      <div className="flex items-center justify-center h-full">
+        <p className="text-red-500">Error: {tokenError}</p>
+      </div>
+    );
+  }
 
   if (!mapboxToken) {
     return (
       <div className="flex items-center justify-center h-full">
-        <p className="text-red-500">Mapbox token not found</p>
+        <p className="text-gray-600">Loading map...</p>
       </div>
     );
   }
