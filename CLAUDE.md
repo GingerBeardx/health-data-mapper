@@ -1,0 +1,1 @@
+- I will ask if I want you to run the project using npm run dev. I have it running in the background.
